@@ -10,11 +10,6 @@ var CommentBox = React.createClass({
   }
 });
 
-ReactDOM.render(
-  <CommentBox />,
-  document.getElementById('content')
-);
-
 var CommentList = React.createClass({
 	render: function () {
 		return (
@@ -43,8 +38,53 @@ var Comment = React.createClass({
 				<h2 className="CommentAuthor">
 					{this.props.author}
 				</h2>
-				{marked(this.props.children.toString())}
+				{this.props.children}
 			</div>
 		);
 	}
 });
+
+
+var Inputa = React.createClass({
+ getInitialState: function() {
+    return {value: 2};
+  },
+  handleChange: function(event) {
+    this.setState({value: event.target.value});
+  },
+  render: function() {
+    var value = this.state.value;
+    var doubleval = value*2;
+    return (
+    	<div>
+	    	<input type="text" value={value} onChange={this.handleChange} />
+	    	<div>{doubleval}</div>
+    	</div>
+    );
+  }
+});
+
+
+ReactDOM.render(
+  <CommentBox />,
+  document.getElementById('content')
+);
+
+ReactDOM.render(
+  <Inputa />,
+  document.getElementById('inputy')
+);
+
+
+/*
+  string tabRzymska[]={"I","IV","V","IX","X","XL","L","XC","C","CD","D","CM","M"};
+    int tabArabska[]={1,4,5,9,10,40,50,90,100,400,500,900,1000};
+    string wynik="";
+    int ile=liczba;
+    for(int i=12;i>=0;i--)
+        while(ile>=tabArabska[i]){
+            ile=ile-tabArabska[i];
+            wynik=wynik+tabRzymska[i];
+        }
+    cout<<wynik;
+*/
