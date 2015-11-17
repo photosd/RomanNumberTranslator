@@ -3,15 +3,7 @@ var RomanCalc = React.createClass({
 		return {value: ""};
 	},
 	handleChange: function(event) {
-		var newInt = parseInt(event.target.value, 10); // (Number.isInteger(event.target.value) ? event.target.value : this.state.value);
-		if (isNaN(newInt)) {
-			if (event.target.value == "") {
-				newInt = ""; 
-			} else {
-				newInt = this.state.value;
-			}
-		}
-		this.setState({value: newInt});
+		this.setState({value: event.target.value});
 	},
 	render: function() {
 		var value = this.state.value;
@@ -23,7 +15,7 @@ var RomanCalc = React.createClass({
 		for (i=32;i>=0;i--) {
 			while (ile>=tabArabska[i]) {
 				ile=ile-tabArabska[i];
-				wynik=wynik+tabRzymska[i];
+            wynik=wynik+tabRzymska[i];
 			}
 		}
 		return (
