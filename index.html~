@@ -102,7 +102,7 @@
 
 			<h1>Header 1</h1>
 			<div id="content"></div>
-			<script src="build/example.js"></script> 
+			<script type="text/babel" src="build/example.js"></script> 
 
 
 		</section>

@@ -14,21 +14,40 @@ BASE (MOBILE) SIZE
 */
 
 /* typography */
+
+@font-face {
+	font-family: "Caesar";
+	src: url(CAESAR.TTF) format("truetype")
+}	
 body{
 	color:#666;
-	font-family:'Ubuntu', Arial, Helvetica, sans-serif; 
+	font-family:'Caesar', Arial, Helvetica, sans-serif; 
 	font-size:1em;
 	line-height:1.4em; 
 	font-weight:normal;
 }
 h1, h2, h3, h4, h5, h6{
 	font-weight:normal;
-	font-family:'Droid Serif', Arial, Helvetica, sans-serif; 
+	font-family:'Caesar', Arial, Helvetica, sans-serif; 
 	line-height:1.5em;
 	margin:.45em 0;
 	padding:0;
 } 
 
+/* nowe */
+.ovl {
+	text-decoration: overline;    	
+}
+.rlovl {
+	text-decoration: overline;
+	padding: 0px 2px;
+	margin-right: 2px;
+	border-left: thin solid;
+	border-right: thin solid;
+}
+.rzymska {
+	font-size: 1.5em;	
+}
 
 /* links */
 a,

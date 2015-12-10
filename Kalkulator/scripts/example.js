@@ -69,7 +69,7 @@ var RomanCalc = React.createClass({
 			<h2>Wpisz liczbę arabską:</h2>
 			<input type="text" value={value} onChange={this.handleChange} />
 			<h2>Jej odpowiednik w systemie rzymskim:</h2>
-			<div dangerouslySetInnerHTML={{__html: wynik.toString()}} />
+			<div className="rzymska" dangerouslySetInnerHTML={{__html: wynik.toString()}} />
 		</div>
 		);
 	}
