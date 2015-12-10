@@ -45,6 +45,9 @@ var RomanCalc = React.createClass({
 				newInt = this.state.value;
 			}
 		}
+		if (newInt > 999999999) {
+			newInt = this.state.value;
+		}
 		this.setState({value: newInt});
 	},
 	render: function() {

@@ -14,6 +14,9 @@ var RomanCalc = React.createClass({
 				newInt = this.state.value;
 			}
 		}
+		if (newInt > 999999999) {
+			newInt = this.state.value;
+		}
 		this.setState({ value: newInt });
 	},
 	render: function () {
@@ -42,7 +45,7 @@ var RomanCalc = React.createClass({
 				null,
 				"Wpisz liczbę arabską:"
 			),
-			React.createElement("input", { type: "text", value: value, onChange: this.handleChange }),
+			React.createElement("input", { type: "text", value: value, maxLength: "10", onChange: this.handleChange }),
 			React.createElement(
 				"h2",
 				null,
