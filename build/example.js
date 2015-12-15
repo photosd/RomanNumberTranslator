@@ -1,3 +1,49 @@
+var ArabicInput = React.createClass({
+	displayName: "ArabicInput",
+
+	render: function () {
+		return React.createElement(
+			"div",
+			{ className: "number arabic" },
+			React.createElement(
+				"h2",
+				null,
+				"Enter your number:"
+			),
+			React.createElement("input", { type: "text", value: this.props.value, maxLength: "10", onChange: this.props.handleChange })
+		);
+	}
+});
+
+var RomanOutput = React.createClass({
+	displayName: "RomanOutput",
+
+	render: function () {
+		return React.createElement(
+			"div",
+			{ className: "number roman" },
+			React.createElement(
+				"h2",
+				null,
+				"Its equivalent in roman numerals:"
+			),
+			React.createElement("div", { className: "rzymska", dangerouslySetInnerHTML: { __html: this.props.wynik.toString() } })
+		);
+	}
+});
+
+var RomanTutorial = React.createClass({
+	displayName: "RomanTutorial",
+
+	render: function () {
+		return React.createElement(
+			"div",
+			{ className: "tutorial" },
+			this.props.tutorial
+		);
+	}
+});
+
 var RomanCalc = React.createClass({
 	displayName: "RomanCalc",
 
@@ -23,6 +69,7 @@ var RomanCalc = React.createClass({
 		var value = this.state.value;
 
 		var wynik = "";
+		var tutorial = "";
 
 		if (value > 3999999) {
 			wynik = "Max number is 3999999";
@@ -33,32 +80,19 @@ var RomanCalc = React.createClass({
 				while (ile >= this.valuesTab[i][0]) {
 					ile = ile - this.valuesTab[i][0];
 					wynik = wynik + this.valuesTab[i][1];
+					if (tutorial != "") {
+						tutorial += " + ";
+					}
+					tutorial += this.valuesTab[i][0];
 				}
 			}
 		}
 		return React.createElement(
 			"div",
 			null,
-			React.createElement(
-				"div",
-				{ className: "number arabic" },
-				React.createElement(
-					"h2",
-					null,
-					"Enter your number:"
-				),
-				React.createElement("input", { type: "text", value: value, maxLength: "10", onChange: this.handleChange })
-			),
-			React.createElement(
-				"div",
-				{ className: "number roman" },
-				React.createElement(
-					"h2",
-					null,
-					"Its equivalent in roman numerals:"
-				),
-				React.createElement("div", { className: "rzymska", dangerouslySetInnerHTML: { __html: wynik.toString() } })
-			)
+			React.createElement(ArabicInput, { value: value, handleChange: this.handleChange }),
+			React.createElement(RomanOutput, { wynik: wynik }),
+			React.createElement(RomanTutorial, { tutorial: tutorial })
 		);
 	}
 });

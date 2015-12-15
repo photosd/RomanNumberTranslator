@@ -1,3 +1,35 @@
+var ArabicInput = React.createClass({
+	render: function() {
+		return (
+			<div className="number arabic">
+				<h2>Enter your number:</h2>
+				<input type="text" value={this.props.value} maxLength="10" onChange={this.props.handleChange} />
+			</div>	
+		);
+	}
+});
+
+var RomanOutput = React.createClass({
+	render: function() {
+		return (
+			<div className="number roman">
+				<h2>Its equivalent in roman numerals:</h2>
+				<div className="rzymska" dangerouslySetInnerHTML={{__html: this.props.wynik.toString()}} />		
+			</div>
+		);
+	}
+});
+
+var RomanTutorial = React.createClass({
+	render: function() {
+		return (
+			<div className="tutorial">
+				{this.props.tutorial}
+			</div>
+		);
+	}
+});
+
 var RomanCalc = React.createClass({
 	valuesTab: [
 	     [1, "I"],
@@ -54,6 +86,7 @@ var RomanCalc = React.createClass({
 		var value = this.state.value;
 
 		var wynik = "";
+		var tutorial = "";
 
 		if (value > 3999999) {
 			wynik = "Max number is 3999999";
@@ -64,24 +97,22 @@ var RomanCalc = React.createClass({
 				while (ile >= this.valuesTab[i][0]) {
 					ile = ile - this.valuesTab[i][0];
 					wynik = wynik + this.valuesTab[i][1];
+					if (tutorial != "") {
+						tutorial += " + ";
+					}
+					tutorial += this.valuesTab[i][0];
 				}
 			}
 		}
 		return (
 		<div>
-			<div className="number arabic">
-				<h2>Enter your number:</h2>
-				<input type="text" value={value} maxLength="10" onChange={this.handleChange} />
-			</div>
-			<div className="number roman">
-				<h2>Its equivalent in roman numerals:</h2>
-				<div className="rzymska" dangerouslySetInnerHTML={{__html: wynik.toString()}} />
-			</div>
+			<ArabicInput value={value} handleChange={this.handleChange} />
+			<RomanOutput wynik={wynik} />
+			<RomanTutorial tutorial={tutorial} />
 		</div>
 		);
 	}
 });
-
 
 ReactDOM.render(
   <RomanCalc />,
