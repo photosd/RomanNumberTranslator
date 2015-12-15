@@ -46,7 +46,16 @@ h1, h2, h3, h4, h5, h6{
 	border-right: thin solid;
 }
 .rzymska {
-	font-size: 1.5em;	
+	font-size: 2.5em;	
+}
+
+.number {
+	display: inline-block;
+	float: left;
+}
+
+.arabic {
+	margin-right: 50px;
 }
 
 /* links */
@@ -91,7 +100,7 @@ header{
 }
 
 #content {  
-	margin:40px 0;
+	margin:60px 0 90px 0;
 }
 
 aside { 

@@ -56,7 +56,7 @@ var RomanCalc = React.createClass({
 		var wynik = "";
 
 		if (value > 3999999) {
-			wynik = "Za duża liczba";
+			wynik = "Max number is 3999999";
 		} else {
 			var ile = value;
 			var i = this.valuesTab.length - 1;
@@ -69,10 +69,14 @@ var RomanCalc = React.createClass({
 		}
 		return (
 		<div>
-			<h2>Wpisz liczbę arabską:</h2>
-			<input type="text" value={value} maxLength="10" onChange={this.handleChange} />
-			<h2>Jej odpowiednik w systemie rzymskim:</h2>
-			<div className="rzymska" dangerouslySetInnerHTML={{__html: wynik.toString()}} />
+			<div className="number arabic">
+				<h2>Enter your number:</h2>
+				<input type="text" value={value} maxLength="10" onChange={this.handleChange} />
+			</div>
+			<div className="number roman">
+				<h2>Its equivalent in roman numerals:</h2>
+				<div className="rzymska" dangerouslySetInnerHTML={{__html: wynik.toString()}} />
+			</div>
 		</div>
 		);
 	}
