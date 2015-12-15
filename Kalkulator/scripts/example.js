@@ -20,11 +20,33 @@ var RomanOutput = React.createClass({
 	}
 });
 
-var RomanTutorial = React.createClass({
+var TutorialElement = React.createClass({
 	render: function() {
 		return (
-			<div className="tutorial">
-				{this.props.tutorial}
+			<div>
+				<span className="arabic_tutorial_elem">
+					{this.props.element.arabic}
+				</span> 
+				=  
+				<span className="roman_tutorial_elem"
+					dangerouslySetInnerHTML={{__html: this.props.element.roman.toString()}} />
+			</div>
+		);
+	}
+});
+
+var RomanTutorial = React.createClass({
+	render: function() {
+		var elements = [];
+		for (var i = 0; i < this.props.tutorialElements.length; ++i) {
+			if (i > 0) {
+				elements.push(<span>+</span>);
+			}
+			elements.push(<TutorialElement element={this.props.tutorialElements[i]} />);
+		}
+		return (
+			<div className="tutorial_elements">
+				{elements}
 			</div>
 		);
 	}
@@ -86,7 +108,7 @@ var RomanCalc = React.createClass({
 		var value = this.state.value;
 
 		var wynik = "";
-		var tutorial = "";
+		var tutorialElements = [];
 
 		if (value > 3999999) {
 			wynik = "Max number is 3999999";
@@ -97,10 +119,10 @@ var RomanCalc = React.createClass({
 				while (ile >= this.valuesTab[i][0]) {
 					ile = ile - this.valuesTab[i][0];
 					wynik = wynik + this.valuesTab[i][1];
-					if (tutorial != "") {
-						tutorial += " + ";
-					}
-					tutorial += this.valuesTab[i][0];
+					tutorialElements.push({ 
+						arabic: this.valuesTab[i][0], 
+						roman: this.valuesTab[i][1]
+					});
 				}
 			}
 		}
@@ -108,7 +130,7 @@ var RomanCalc = React.createClass({
 		<div>
 			<ArabicInput value={value} handleChange={this.handleChange} />
 			<RomanOutput wynik={wynik} />
-			<RomanTutorial tutorial={tutorial} />
+			<RomanTutorial tutorialElements={tutorialElements} />
 		</div>
 		);
 	}

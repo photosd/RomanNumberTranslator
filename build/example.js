@@ -32,14 +32,44 @@ var RomanOutput = React.createClass({
 	}
 });
 
-var RomanTutorial = React.createClass({
-	displayName: "RomanTutorial",
+var TutorialElement = React.createClass({
+	displayName: "TutorialElement",
 
 	render: function () {
 		return React.createElement(
 			"div",
-			{ className: "tutorial" },
-			this.props.tutorial
+			null,
+			React.createElement(
+				"span",
+				{ className: "arabic_tutorial_elem" },
+				this.props.element.arabic
+			),
+			"=",
+			React.createElement("span", { className: "roman_tutorial_elem",
+				dangerouslySetInnerHTML: { __html: this.props.element.roman.toString() } })
+		);
+	}
+});
+
+var RomanTutorial = React.createClass({
+	displayName: "RomanTutorial",
+
+	render: function () {
+		var elements = [];
+		for (var i = 0; i < this.props.tutorialElements.length; ++i) {
+			if (i > 0) {
+				elements.push(React.createElement(
+					"span",
+					null,
+					"+"
+				));
+			}
+			elements.push(React.createElement(TutorialElement, { element: this.props.tutorialElements[i] }));
+		}
+		return React.createElement(
+			"div",
+			{ className: "tutorial_elements" },
+			elements
 		);
 	}
 });
@@ -69,7 +99,7 @@ var RomanCalc = React.createClass({
 		var value = this.state.value;
 
 		var wynik = "";
-		var tutorial = "";
+		var tutorialElements = [];
 
 		if (value > 3999999) {
 			wynik = "Max number is 3999999";
@@ -80,10 +110,10 @@ var RomanCalc = React.createClass({
 				while (ile >= this.valuesTab[i][0]) {
 					ile = ile - this.valuesTab[i][0];
 					wynik = wynik + this.valuesTab[i][1];
-					if (tutorial != "") {
-						tutorial += " + ";
-					}
-					tutorial += this.valuesTab[i][0];
+					tutorialElements.push({
+						arabic: this.valuesTab[i][0],
+						roman: this.valuesTab[i][1]
+					});
 				}
 			}
 		}
@@ -92,7 +122,7 @@ var RomanCalc = React.createClass({
 			null,
 			React.createElement(ArabicInput, { value: value, handleChange: this.handleChange }),
 			React.createElement(RomanOutput, { wynik: wynik }),
-			React.createElement(RomanTutorial, { tutorial: tutorial })
+			React.createElement(RomanTutorial, { tutorialElements: tutorialElements })
 		);
 	}
 });
