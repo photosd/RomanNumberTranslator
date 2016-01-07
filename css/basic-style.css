@@ -58,6 +58,15 @@ h1, h2, h3, h4, h5, h6{
 	margin-right: 50px;
 }
 
+.tutorial_elements {
+	float: left;
+	clear: both;
+}
+
+.tutorial_single_element {
+	display: inline-block;
+}
+
 /* links */
 a,
 a:visited,

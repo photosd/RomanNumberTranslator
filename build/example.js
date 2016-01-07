@@ -38,15 +38,14 @@ var TutorialElement = React.createClass({
 	render: function () {
 		return React.createElement(
 			"div",
-			null,
+			{ className: "tutorial_single_element" },
+			React.createElement("div", { className: "roman_tutorial_elem",
+				dangerouslySetInnerHTML: { __html: this.props.element.roman.toString() } }),
 			React.createElement(
-				"span",
+				"div",
 				{ className: "arabic_tutorial_elem" },
 				this.props.element.arabic
-			),
-			"=",
-			React.createElement("span", { className: "roman_tutorial_elem",
-				dangerouslySetInnerHTML: { __html: this.props.element.roman.toString() } })
+			)
 		);
 	}
 });

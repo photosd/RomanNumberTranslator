@@ -23,13 +23,12 @@ var RomanOutput = React.createClass({
 var TutorialElement = React.createClass({
 	render: function() {
 		return (
-			<div>
-				<span className="arabic_tutorial_elem">
-					{this.props.element.arabic}
-				</span> 
-				=  
-				<span className="roman_tutorial_elem"
+			<div className="tutorial_single_element">
+				<div className="roman_tutorial_elem"
 					dangerouslySetInnerHTML={{__html: this.props.element.roman.toString()}} />
+				<div className="arabic_tutorial_elem">
+					{this.props.element.arabic}
+				</div>
 			</div>
 		);
 	}
