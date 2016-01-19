@@ -6,11 +6,25 @@ var ArabicInput = React.createClass({
 			"div",
 			{ className: "number arabic" },
 			React.createElement(
-				"h2",
-				null,
-				"Enter your number:"
+				"div",
+				{ className: "arabska" },
+				React.createElement(
+					"div",
+					null,
+					"Arabic:"
+				),
+				React.createElement("input", { type: "text", value: this.props.value, maxLength: "10", onChange: this.props.handleChange })
 			),
-			React.createElement("input", { type: "text", value: this.props.value, maxLength: "10", onChange: this.props.handleChange })
+			React.createElement(
+				"div",
+				{ className: "arrow" },
+				"=>"
+			),
+			React.createElement(
+				"span",
+				{ className: "tip" },
+				"Type your number here"
+			)
 		);
 	}
 });
@@ -23,11 +37,15 @@ var RomanOutput = React.createClass({
 			"div",
 			{ className: "number roman" },
 			React.createElement(
-				"h2",
+				"div",
 				null,
-				"Its equivalent in roman numerals:"
+				"Roman:"
 			),
-			React.createElement("div", { className: "rzymska", dangerouslySetInnerHTML: { __html: this.props.wynik.toString() } })
+			React.createElement(
+				"div",
+				{ className: "rzymska" },
+				React.createElement("div", { dangerouslySetInnerHTML: { __html: this.props.wynik.toString() } })
+			)
 		);
 	}
 });
@@ -58,8 +76,8 @@ var RomanTutorial = React.createClass({
 		for (var i = 0; i < this.props.tutorialElements.length; ++i) {
 			if (i > 0) {
 				elements.push(React.createElement(
-					"span",
-					null,
+					"div",
+					{ className: "plus" },
 					"+"
 				));
 			}
@@ -68,7 +86,8 @@ var RomanTutorial = React.createClass({
 		return React.createElement(
 			"div",
 			{ className: "tutorial_elements" },
-			elements
+			elements,
+			React.createElement("div", { className: "clr" })
 		);
 	}
 });
@@ -101,7 +120,7 @@ var RomanCalc = React.createClass({
 		var tutorialElements = [];
 
 		if (value > 3999999) {
-			wynik = "Max number is 3999999";
+			wynik = "Max&nbsp;number&nbsp;is&nbsp;3999999";
 		} else {
 			var ile = value;
 			var i = this.valuesTab.length - 1;
@@ -121,7 +140,16 @@ var RomanCalc = React.createClass({
 			null,
 			React.createElement(ArabicInput, { value: value, handleChange: this.handleChange }),
 			React.createElement(RomanOutput, { wynik: wynik }),
-			React.createElement(RomanTutorial, { tutorialElements: tutorialElements })
+			React.createElement(
+				"div",
+				{ className: "number explanation" },
+				React.createElement(
+					"div",
+					null,
+					"Explanation:"
+				),
+				React.createElement(RomanTutorial, { tutorialElements: tutorialElements })
+			)
 		);
 	}
 });

@@ -2,8 +2,12 @@ var ArabicInput = React.createClass({
 	render: function() {
 		return (
 			<div className="number arabic">
-				<h2>Enter your number:</h2>
-				<input type="text" value={this.props.value} maxLength="10" onChange={this.props.handleChange} />
+				<div className="arabska">
+					<div>Arabic:</div>
+					<input type="text" value={this.props.value} maxLength="10" onChange={this.props.handleChange} />
+				</div>
+				<div className="arrow">=&gt;</div>
+				<span className="tip">Type your number here</span>
 			</div>	
 		);
 	}
@@ -13,8 +17,10 @@ var RomanOutput = React.createClass({
 	render: function() {
 		return (
 			<div className="number roman">
-				<h2>Its equivalent in roman numerals:</h2>
-				<div className="rzymska" dangerouslySetInnerHTML={{__html: this.props.wynik.toString()}} />		
+				<div>Roman:</div>
+				<div className="rzymska">
+					<div dangerouslySetInnerHTML={{__html: this.props.wynik.toString()}} />	
+				</div>
 			</div>
 		);
 	}
@@ -39,13 +45,14 @@ var RomanTutorial = React.createClass({
 		var elements = [];
 		for (var i = 0; i < this.props.tutorialElements.length; ++i) {
 			if (i > 0) {
-				elements.push(<span>+</span>);
+				elements.push(<div className="plus">+</div>);
 			}
 			elements.push(<TutorialElement element={this.props.tutorialElements[i]} />);
 		}
 		return (
 			<div className="tutorial_elements">
 				{elements}
+				<div className="clr"></div>
 			</div>
 		);
 	}
@@ -110,7 +117,7 @@ var RomanCalc = React.createClass({
 		var tutorialElements = [];
 
 		if (value > 3999999) {
-			wynik = "Max number is 3999999";
+			wynik = "Max&nbsp;number&nbsp;is&nbsp;3999999";
 		} else {
 			var ile = value;
 			var i = this.valuesTab.length - 1;
@@ -128,8 +135,12 @@ var RomanCalc = React.createClass({
 		return (
 		<div>
 			<ArabicInput value={value} handleChange={this.handleChange} />
+			
 			<RomanOutput wynik={wynik} />
-			<RomanTutorial tutorialElements={tutorialElements} />
+			<div className="number explanation">
+				<div>Explanation:</div>
+				<RomanTutorial tutorialElements={tutorialElements} />
+			</div>
 		</div>
 		);
 	}
